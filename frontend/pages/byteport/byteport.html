@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="/components/universal_styling.css">
+    <link rel="stylesheet" href="/byteport/byteport.css">
+    <link rel="stylesheet" href="/byteport/image_viewer.css">
+    <link rel="stylesheet" href="/byteport/context_menu.css">
+    <link rel="stylesheet" href="/byteport/permission_menu.css">
+    <script src="/components/nav_bar/nav_bar.js"></script>
+    <script type="module" src="/components/modal/modal_menu.js"></script>
+</head>
+<body>
+    <page-nav class="main-nav">
+        <dropdown-menu desc="Upload" openFrom="bottom" class="dropdown">
+            <dropdown-element link="" id="upload_file">
+                <p>File</p>
+                <input type="file" id="upload" name="upload" hidden>
+            </dropdown-element>
+            <dropdown-element link="" id="upload_files"><p>Multiple files</p></dropdown-element>
+            <dropdown-element link="" id="upload_folder"><p>Entire folder</p></dropdown-element>
+        </dropdown-menu>
+        <a class="quick_link" href="" id="new_folder">New Folder</a>
+        <a class="quick_link" href="" id="rename">Rename</a>
+        <a class="quick_link" href="" id="move">Move</a>
+        <a class="quick_link" href="" id="delete">Delete</a>
+    </page-nav>
+    <page-nav class="move-nav" style="display: none;">
+        <a class="quick_link" href="" id="cancel_move">Cancel move</a>
+        <a class="quick_link" href="" id="move_here">Move here</a>
+    </page-nav>
+
+    <main>
+        <div class="byteport_path">
+            <p style="margin-right: 10px;" class="byteport_path_label">Current folder:</p>
+            <span class="byteport_path_element">/</span>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="col-resource"><span id="goToParentDirectory">⇧</span><span id="currentDirectory">Root directory</span></th>
+                    <th class="col-date">Date created</th>
+                    <th class="col-owner">Owner</th>
+                    <th class="col-permission">Permission Level</th>
+                    <th class="col-size">Size</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+                <!-- JS will insert rows here -->
+
+                
+                <!-- <tr>
+                    <td><span class="type">📁</span><span class="file_name">report.pdf</span></td>
+                    <td>r</td>
+                    <td>r</td>
+                    <td>r</td>
+                    <td>r</td>
+                </tr>
+                <tr>
+                    <td>r</td>
+                    <td>r</td>
+                    <td>r</td>
+                    <td>r</td>
+                    <td>r</td>
+                </tr> -->
+            </tbody>
+        </table>
+
+    </main>
+</body>
+
+</head>
+
+<script src="/byteport/image_viewer.js"></script>
+<script src="/byteport/permission_menu.js" type="module"></script>
+<script src="/byteport/byteport.js" type="module"></script>
+
+</html>

@@ -1,0 +1,90 @@
+export default class PermissionMenu {
+
+    async getPermissions(folder_id) {
+        const res = await fetch(`/api/byteport/get_permissions/${folder_id}`);
+        const res_data = await res.json();
+
+        return res_data.data.permission_data;
+    }
+
+    async open(folder_name, folder_id) {
+
+        const permissions = await this.getPermissions(folder_id);
+        const { admins, editors, viewers } = permissions;
+
+        const permissionMenuModal = document.createElement('div');
+
+        permissionMenuModal.innerHTML = `
+            <modal-menu>
+                <menu-controls>
+                    <close-menu></close-menu>
+                </menu-controls>
+
+                <menu-header>
+                    <menu-title>${folder_name}</menu-title>
+                    <menu-text>Permission menu</menu-text>
+                </menu-header>
+                
+                <menu-body id="menu-body"></menu-body>
+            </modal-menu>
+        `;
+
+        const menuBody = permissionMenuModal.querySelector('#menu-body');
+
+        const createList = (label, id, args, usernames = []) => {
+
+            const labelElement = document.createElement('menu-text');
+            labelElement.innerText = label;
+
+            const list = document.createElement('list-input');
+            list.setAttribute('verify-str-src', '/byteport/add_account.js');
+            list.setAttribute('verify-str-args', JSON.stringify(args));
+            list.id = id;
+
+            usernames.forEach(username => {
+                const item = document.createElement('list-element');
+                item.addEventListener('click', async (event) => {
+                    if (!event.target.shadowRoot.querySelector('#del')) return;
+
+                    const res = await fetch(`/api/byteport/remove_permission`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            target_username: username,
+                            folder_id: folder_id
+                        })
+                    });
+
+                    const res_data = await res.json();
+
+                    if (!res.ok) {
+                        console.error(res_data.message);
+                        return false;
+                    } else {
+                        console.log(res_data.message);
+                        return true;
+                    }
+                });
+
+                item.innerText = username;
+                list.appendChild(item);
+            });
+
+            const addElement = document.createElement('list-add-element');
+            addElement.innerText = 'Add element';
+            list.appendChild(addElement);
+
+            menuBody.append(labelElement, list);
+        };
+
+        createList('Administrators', 'admins', [3, folder_id], admins.usernames);
+        createList('Editors', 'editors', [2, folder_id], editors.usernames);
+        createList('Viewers', 'viewers', [1, folder_id], viewers.usernames);
+
+        document.body.append(permissionMenuModal);
+    }
+
+    
+}

@@ -1,0 +1,38 @@
+<style>
+    :host {
+        box-sizing: border-box;
+        width: 100%;
+
+        padding: 10px;
+
+        display: flex;
+        flex-direction: column;
+
+        border-top: 1px solid #dfdfdf;
+        /* border-bottom: 1px solid #dfdfdf; */
+
+        user-select: none;
+
+        overflow-y: auto;
+    }
+
+    :host::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    :host::-webkit-scrollbar-thumb {
+        background-color: #1880ffbd;
+        border-radius: 4px;
+    }
+
+    :host::-webkit-scrollbar-track {
+        background-color: #00295a;
+    }
+
+    host::-webkit-scrollbar-button {
+        display: none;
+    }
+    
+</style>
+
+<slot></slot>

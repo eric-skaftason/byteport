@@ -1,0 +1,36 @@
+{
+  "name": "byteport",
+  "dev-phase": "alpha",
+  "version": "0.1.0-dev",
+  "description": "An open-source file sharing app.",
+  "main": "backend/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node backend/index.js",
+    "dev": "nodemon backend/index.js",
+    "dbinit": "node backend/config/init_db.js",
+    "dbreset": "node backend/config/reset_db.js"
+  },
+  "author": "fjr-tech",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "crypto": "^1.0.1",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "mysql2": "^3.15.3",
+    "node": "^25.1.0",
+    "node-cron": "^4.2.1",
+    "nodemon": "^3.1.10",
+    "prompt-sync": "^4.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eric-skaftason/byteport.git"
+  },
+  "bugs": {
+    "url": "https://github.com/eric-skaftason/byteport/issues"
+  },
+  "homepage": "https://github.com/eric-skaftason/byteport#readme"
+}
